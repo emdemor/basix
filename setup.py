@@ -16,5 +16,5 @@ setup(
     keywords="",
     description=u"Utils for python",
     packages=["basix"],
-    install_requires=["numpy", "scipy", "pandas", "setuptools", "tqdm", "scikit-learn", "pyarrow"],
+    install_requires=["numpy", "scipy", "pandas", "setuptools", "tqdm", "scikit-learn", "pyarrow", "loguru"],
 )

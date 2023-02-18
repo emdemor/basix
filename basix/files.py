@@ -3,8 +3,9 @@ import os
 import logging
 import sys
 import shutil
+import requests
 from pathlib import Path
-
+from loguru import logger
 
 def read_file(file: str) -> str:
     """Read a file content
@@ -152,3 +153,21 @@ def remove_directory(folder_path, recursive: bool = False) -> None:
         remove_directory_recursively(folder_path)
     else:
         remove_empty_directory(folder_path)
+
+def download_file(url: str, path: str) -> None:
+    """
+    This function downloads a file from the specified URL and saves it to the specified path.
+    Args:
+        url (str): the URL of the file to download.
+        path (str): the path to save the file to.
+    Raises:
+        Exception: if there is an error while downloading the file.
+    """
+    try:
+        response = requests.get(url)
+        with open(path, "wb") as file:
+            file.write(response.content)
+
+    except Exception as err:
+        logger.error(err)
+        raise err
