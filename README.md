@@ -11,6 +11,7 @@ basix
 │     └─ get_coord
 │ 
 ├─ files.py
+│  ├─ download_file
 │  ├─ read_file
 │  ├─ file_print
 │  ├─ make_directory
