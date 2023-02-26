@@ -1,6 +1,6 @@
 import inspect
 from dataclasses import dataclass
-from typing import Optional, List, Callable
+from typing import Optional, List, Callable, Any
 
 
 @dataclass
@@ -14,13 +14,16 @@ class ArgumentProperties:
         The name of the argument.
     annotation : Optional[str], optional
         The type annotation of the argument, if specified.
-    default : Optional[str], optional
+    has_default : Optional[str], optional
+        Flag that points if the argument has default value.
+    default_value : Optional[str], optional
         The default value of the argument, if specified.
     """
 
     name: str
     annotation: Optional[str]
-    default: Optional[str]
+    has_default: bool
+    default_value: Optional[Any]
 
 
 @dataclass
@@ -50,6 +53,8 @@ class FunctionProperties:
     args_properties: List[ArgumentProperties]
     n_not_defaults: int
     n_defaults: int
+    non_default_args: List[ArgumentProperties]
+    non_default_args: List[ArgumentProperties]
 
 
 def get_function_properties(function: Callable) -> FunctionProperties:
@@ -78,7 +83,8 @@ def get_function_properties(function: Callable) -> FunctionProperties:
                     "annotation": param.annotation
                     if not (param.annotation == inspect._empty)
                     else None,
-                    "default": param.default if not (param.default == inspect._empty) else None,
+                    "has_default": (param.default != inspect._empty),
+                    "default_value": param.default if (param.default != inspect._empty) else None,
                 }
             )
         )
@@ -89,7 +95,9 @@ def get_function_properties(function: Callable) -> FunctionProperties:
             "module": function.__module__,
             "result_annotation": sig.return_annotation,
             "args_properties": args_prop,
-            "n_not_defaults": sum(1 for arg in args_prop if arg.default is None),
-            "n_defaults": sum(1 for arg in args_prop if arg.default is not None),
+            "n_not_defaults": sum(1 for arg in args_prop if arg.has_default is None),
+            "n_defaults": sum(1 for arg in args_prop if arg.has_default is not None),
+            "non_default_args": list(filter(lambda arg: not arg.has_default, args_prop)),
+            "default_args": list(filter(lambda arg: arg.has_default, args_prop)),
         }
     )
