@@ -19,6 +19,11 @@ basix
 │  ├─ remove_directory_recursively
 │  └─ remove_directory
 │ 
+├─ functions.py
+│  ├─ ArgumentProperties
+│  ├─ FunctionProperties
+│  └─ get_function_properties
+│ 
 ├─ numbers.py
 │  └─ round
 │ 
