@@ -23,6 +23,7 @@ basix
 ├─ functions.py
 │  ├─ ArgumentProperties
 │  ├─ FunctionProperties
+│  ├─ Pipe
 │  └─ get_function_properties
 │ 
 ├─ numbers.py
