@@ -111,7 +111,7 @@ def get_function_properties(function: Callable) -> FunctionProperties:
 
 
 class Pipe:
-    def __init__(self, stages: List[Callable]) -> None:
+    def __init__(self, *stages: List[Callable]) -> None:
         """
         Initialize the Pipe object.
 
