@@ -99,8 +99,8 @@ def get_function_properties(function: Callable) -> FunctionProperties:
             "module": function.__module__,
             "result_annotation": sig.return_annotation,
             "args_properties": args_prop,
-            "n_not_defaults": sum(1 for arg in args_prop if arg.has_default is None),
-            "n_defaults": sum(1 for arg in args_prop if arg.has_default is not None),
+            "n_not_defaults": sum(1 for arg in args_prop if arg.default_value is not None),
+            "n_defaults": sum(1 for arg in args_prop if arg.default_value is None),
             "non_default_args": list(filter(lambda arg: not arg.has_default, args_prop)),
             "default_args": list(filter(lambda arg: arg.has_default, args_prop)),
         }
