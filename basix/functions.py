@@ -45,6 +45,10 @@ class FunctionProperties:
         The number of non-default arguments in the function.
     n_defaults : int
         The number of arguments with default values in the function.
+    non_default_args : List[ArgumentProperties]
+        List of non-default arguments.
+    default_args : List[ArgumentProperties]
+        List of default arguments.
     """
 
     name: str
@@ -54,7 +58,7 @@ class FunctionProperties:
     n_not_defaults: int
     n_defaults: int
     non_default_args: List[ArgumentProperties]
-    non_default_args: List[ArgumentProperties]
+    default_args: List[ArgumentProperties]
 
 
 def get_function_properties(function: Callable) -> FunctionProperties:
